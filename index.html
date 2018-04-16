@@ -26,13 +26,14 @@
     <div class="slides">
         <section>
             <h3>Get rich quick with…</h3>
-            <img class="stretch plain" src="media/title.png">
+            <img alt="React Context – New! 16.3" class="stretch plain" src="media/title.png">
             <small>
                 <strong>Patrick Hund</strong> | frontend developer at <a href="https://ebaytech.berlin">eBay</a>
                 | <a target="_blank" href="https://twitter.com/wiekatz">@wiekatz</a>
             </small>
         </section>
         <section>
+            <h3>Google Publisher Tags + Prebid… Ugh!</h3>
             <pre class="stretch small"><code data-trim style="height: 150vh">
 <script>
     var PREBID_TIMEOUT = 700;
@@ -41,7 +42,7 @@
         code: 'div-gpt-ad-1460505748561-0',
         mediaTypes: {
             banner: {
-                sizes: [[300, 250], [300,600]]
+                sizes: [[300, 250], [300, 600]]
             }
         },
         bids: [{
@@ -50,7 +51,7 @@
                 placementId: '10433394'
             }
         }]
-    },{
+    }, {
         code: 'div-gpt-ad-1460505661639-0',
         mediaTypes: {
             banner: {
@@ -73,11 +74,11 @@
 <script>
     var googletag = googletag || {};
     googletag.cmd = googletag.cmd || [];
-    googletag.cmd.push(function() {
+    googletag.cmd.push(function () {
         googletag.pubads().disableInitialLoad();
     });
 
-    pbjs.que.push(function() {
+    pbjs.que.push(function () {
         pbjs.addAdUnits(adUnits);
         pbjs.requestBids({
             bidsBackHandler: sendAdserverRequest
@@ -85,17 +86,19 @@
     });
 
     function sendAdserverRequest() {
-        if (pbjs.adserverRequestSent) return;
+        if (pbjs.adserverRequestSent) {
+            return;
+        }
         pbjs.adserverRequestSent = true;
-        googletag.cmd.push(function() {
-            pbjs.que.push(function() {
+        googletag.cmd.push(function () {
+            pbjs.que.push(function () {
                 pbjs.setTargetingForGPTAsync();
                 googletag.pubads().refresh();
             });
         });
     }
 
-    setTimeout(function() {
+    setTimeout(function () {
         sendAdserverRequest();
     }, PREBID_TIMEOUT);
 
@@ -114,9 +117,13 @@
 </script>
 <script>
     googletag.cmd.push(function () {
-        googletag.defineSlot('/19968336/header-bid-tag-0', [[300, 250], [300, 600]], 'div-gpt-ad-1460505748561-0').addService(googletag.pubads());
+        googletag.defineSlot(
+            '/19968336/header-bid-tag-0', [[300, 250], [300, 600]], 'div-gpt-ad-1460505748561-0'
+        ).addService(googletag.pubads());
 
-        googletag.defineSlot('/19968336/header-bid-tag1', [[728, 90], [970, 90]], 'div-gpt-ad-1460505661639-0').addService(googletag.pubads());
+        googletag.defineSlot(
+            '/19968336/header-bid-tag1', [[728, 90], [970, 90]], 'div-gpt-ad-1460505661639-0'
+        ).addService(googletag.pubads());
 
         googletag.pubads().enableSingleRequest();
         googletag.enableServices();
@@ -125,22 +132,37 @@
 <h5>Div-1</h5>
 <div id='div-gpt-ad-1460505748561-0'>
     <script type='text/javascript'>
-        googletag.cmd.push(function() { googletag.display('div-gpt-ad-1460505748561-0'); });
+        googletag.cmd.push(function () {
+            googletag.display('div-gpt-ad-1460505748561-0');
+        });
     </script>
 </div>
 
 <h5>Div-2</h5>
 <div id='div-gpt-ad-1460505661639-0'>
     <script type='text/javascript'>
-        googletag.cmd.push(function() { googletag.display('div-gpt-ad-1460505661639-0'); });
+        googletag.cmd.push(function () {
+            googletag.display('div-gpt-ad-1460505661639-0');
+        });
     </script>
 </div>
             </code></pre>
+            <aside class="notes">
+                <ul>
+                    <li>Mention problems with single page applications</li>
+                </ul>
+            </aside>
         </section>
         <section>
             <video controls class="stretch">
                 <source data-src="media/adding-provider-and-slots.mov" type="video/mp4"/>
             </video>
+            <p class="small">Code example online: <a href="http://bit.ly/richquick1">http://bit.ly/richquick1</a></p>
+            <aside class="notes">
+                <ul>
+                    <li>Ugly setup code nicely encapsulated</li>
+                </ul>
+            </aside>
         </section>
     </div>
 </div>
@@ -160,9 +182,9 @@
             { src: 'plugin/markdown/markdown.js' },
             { src: 'plugin/notes/notes.js', async: true },
             {
-                src: 'plugin/highlight/highlight.js', async: true, callback: function () {
-                    hljs.initHighlightingOnLoad();
-                }
+                src: 'plugin/highlight/highlight.js',
+                async: true,
+                callback: () => hljs.initHighlightingOnLoad()
             }
         ]
     });

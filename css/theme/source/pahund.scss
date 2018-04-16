@@ -63,6 +63,10 @@ $selectionBackgroundColor: $magenta;
 @import "../template/theme";
 // ---------------------------------------------
 
+.reveal .small {
+	font-size: 50%;
+}
+
 .reveal pre.small {
 	font-size: 0.3em;
 }
