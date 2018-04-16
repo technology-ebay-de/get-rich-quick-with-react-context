@@ -1,0 +1,170 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Get Rich Quick With React Context</title>
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/pahund.css">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+</head>
+<body>
+<div class="reveal">
+    <div class="slides">
+        <section>
+            <h1>Get Rich Quick With React Context</h1>
+            <small>
+                <strong>Patrick Hund</strong> | frontend developer at <a href="https://ebaytech.berlin">eBay</a>
+                | <a target="_blank" href="https://twitter.com/wiekatz">@wiekatz</a>
+            </small>
+        </section>
+        <section>
+            <pre class="stretch small"><code data-trim style="height: 150vh">
+<script>
+    var PREBID_TIMEOUT = 700;
+
+    var adUnits = [{
+        code: 'div-gpt-ad-1460505748561-0',
+        mediaTypes: {
+            banner: {
+                sizes: [[300, 250], [300,600]]
+            }
+        },
+        bids: [{
+            bidder: 'appnexus',
+            params: {
+                placementId: '10433394'
+            }
+        }]
+    },{
+        code: 'div-gpt-ad-1460505661639-0',
+        mediaTypes: {
+            banner: {
+                sizes: [[728, 90], [970, 90]]
+            }
+        },
+        bids: [{
+            bidder: 'appnexus',
+            params: {
+                placementId: '10433394'
+            }
+        }]
+    }];
+
+    var pbjs = pbjs || {};
+    pbjs.que = pbjs.que || [];
+
+</script>
+<script type="text/javascript" src="//acdn.adnxs.com/prebid/not-for-prod/1/prebid.js" async></script>
+<script>
+    var googletag = googletag || {};
+    googletag.cmd = googletag.cmd || [];
+    googletag.cmd.push(function() {
+        googletag.pubads().disableInitialLoad();
+    });
+
+    pbjs.que.push(function() {
+        pbjs.addAdUnits(adUnits);
+        pbjs.requestBids({
+            bidsBackHandler: sendAdserverRequest
+        });
+    });
+
+    function sendAdserverRequest() {
+        if (pbjs.adserverRequestSent) return;
+        pbjs.adserverRequestSent = true;
+        googletag.cmd.push(function() {
+            pbjs.que.push(function() {
+                pbjs.setTargetingForGPTAsync();
+                googletag.pubads().refresh();
+            });
+        });
+    }
+
+    setTimeout(function() {
+        sendAdserverRequest();
+    }, PREBID_TIMEOUT);
+
+</script>
+<script>
+    (function () {
+        var gads = document.createElement('script');
+        gads.async = true;
+        gads.type = 'text/javascript';
+        var useSSL = 'https:' == document.location.protocol;
+        gads.src = (useSSL ? 'https:' : 'http:') +
+            '//www.googletagservices.com/tag/js/gpt.js';
+        var node = document.getElementsByTagName('script')[0];
+        node.parentNode.insertBefore(gads, node);
+    })();
+</script>
+<script>
+    googletag.cmd.push(function () {
+        googletag.defineSlot('/19968336/header-bid-tag-0', [[300, 250], [300, 600]], 'div-gpt-ad-1460505748561-0').addService(googletag.pubads());
+
+        googletag.defineSlot('/19968336/header-bid-tag1', [[728, 90], [970, 90]], 'div-gpt-ad-1460505661639-0').addService(googletag.pubads());
+
+        googletag.pubads().enableSingleRequest();
+        googletag.enableServices();
+    });
+</script>
+<h5>Div-1</h5>
+<div id='div-gpt-ad-1460505748561-0'>
+    <script type='text/javascript'>
+        googletag.cmd.push(function() { googletag.display('div-gpt-ad-1460505748561-0'); });
+    </script>
+</div>
+
+<h5>Div-2</h5>
+<div id='div-gpt-ad-1460505661639-0'>
+    <script type='text/javascript'>
+        googletag.cmd.push(function() { googletag.display('div-gpt-ad-1460505661639-0'); });
+    </script>
+</div>
+            </code></pre>
+        </section>
+        <section>
+            <video controls class="stretch">
+                <source data-src="media/adding-provider-and-slots.mov" type="video/mp4"/>
+            </video>
+        </section>
+    </div>
+</div>
+
+<script src="lib/js/head.min.js"></script>
+<script src="js/reveal.js"></script>
+
+<script>
+    // More info about config & dependencies:
+    // - https://github.com/hakimel/reveal.js#configuration
+    // - https://github.com/hakimel/reveal.js#dependencies
+    /* global hljs */
+    Reveal.initialize({
+        history: true,
+        dependencies: [
+            { src: 'plugin/markdown/marked.js' },
+            { src: 'plugin/markdown/markdown.js' },
+            { src: 'plugin/notes/notes.js', async: true },
+            {
+                src: 'plugin/highlight/highlight.js', async: true, callback: function () {
+                    hljs.initHighlightingOnLoad();
+                }
+            }
+        ]
+    });
+</script>
+</body>
+</html>
