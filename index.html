@@ -33,127 +33,6 @@
             </small>
         </section>
         <section>
-            <h3>Google Publisher Tags + Prebid… Ugh!</h3>
-            <pre class="stretch small"><code data-trim style="height: 150vh" class="html">
-<script>
-    var PREBID_TIMEOUT = 700;
-
-    var adUnits = [{
-        code: 'div-gpt-ad-1460505748561-0',
-        mediaTypes: {
-            banner: {
-                sizes: [[300, 250], [300, 600]]
-            }
-        },
-        bids: [{
-            bidder: 'appnexus',
-            params: {
-                placementId: '10433394'
-            }
-        }]
-    }, {
-        code: 'div-gpt-ad-1460505661639-0',
-        mediaTypes: {
-            banner: {
-                sizes: [[728, 90], [970, 90]]
-            }
-        },
-        bids: [{
-            bidder: 'appnexus',
-            params: {
-                placementId: '10433394'
-            }
-        }]
-    }];
-
-    var pbjs = pbjs || {};
-    pbjs.que = pbjs.que || [];
-
-</script>
-<script type="text/javascript" src="//acdn.adnxs.com/prebid/not-for-prod/1/prebid.js" async></script>
-<script>
-    var googletag = googletag || {};
-    googletag.cmd = googletag.cmd || [];
-    googletag.cmd.push(function () {
-        googletag.pubads().disableInitialLoad();
-    });
-
-    pbjs.que.push(function () {
-        pbjs.addAdUnits(adUnits);
-        pbjs.requestBids({
-            bidsBackHandler: sendAdserverRequest
-        });
-    });
-
-    function sendAdserverRequest() {
-        if (pbjs.adserverRequestSent) {
-            return;
-        }
-        pbjs.adserverRequestSent = true;
-        googletag.cmd.push(function () {
-            pbjs.que.push(function () {
-                pbjs.setTargetingForGPTAsync();
-                googletag.pubads().refresh();
-            });
-        });
-    }
-
-    setTimeout(function () {
-        sendAdserverRequest();
-    }, PREBID_TIMEOUT);
-
-</script>
-<script>
-    (function () {
-        var gads = document.createElement('script');
-        gads.async = true;
-        gads.type = 'text/javascript';
-        var useSSL = 'https:' == document.location.protocol;
-        gads.src = (useSSL ? 'https:' : 'http:') +
-            '//www.googletagservices.com/tag/js/gpt.js';
-        var node = document.getElementsByTagName('script')[0];
-        node.parentNode.insertBefore(gads, node);
-    })();
-</script>
-<script>
-    googletag.cmd.push(function () {
-        googletag.defineSlot(
-            '/19968336/header-bid-tag-0', [[300, 250], [300, 600]], 'div-gpt-ad-1460505748561-0'
-        ).addService(googletag.pubads());
-
-        googletag.defineSlot(
-            '/19968336/header-bid-tag1', [[728, 90], [970, 90]], 'div-gpt-ad-1460505661639-0'
-        ).addService(googletag.pubads());
-
-        googletag.pubads().enableSingleRequest();
-        googletag.enableServices();
-    });
-</script>
-<h5>Div-1</h5>
-<div id='div-gpt-ad-1460505748561-0'>
-    <script type='text/javascript'>
-        googletag.cmd.push(function () {
-            googletag.display('div-gpt-ad-1460505748561-0');
-        });
-    </script>
-</div>
-
-<h5>Div-2</h5>
-<div id='div-gpt-ad-1460505661639-0'>
-    <script type='text/javascript'>
-        googletag.cmd.push(function () {
-            googletag.display('div-gpt-ad-1460505661639-0');
-        });
-    </script>
-</div>
-            </code></pre>
-            <aside class="notes">
-                <ul>
-                    <li>Mention problems with single page applications</li>
-                </ul>
-            </aside>
-        </section>
-        <section>
             <video controls class="stretch">
                 <source data-src="media/adding-provider-and-slots.mov" type="video/mp4">
             </video>
@@ -194,31 +73,6 @@ export default createContext(() => {});
         <section>
             <div class="columns-container">
                 <div class="column-two-thirds">
-                    <h4 class="nocaps">Placement.js</h4>
-                    <pre><code data-trim class="js">
-import React, { Component } from 'react';
-
-export default class extends Component {
-  componentDidMount() {
-    const { activate, id } = this.props;
-    activate(id);
-  }
-
-  render() {
-    return &lt;div id={this.props.id} /&gt;
-  }
-}
-            </code></pre>
-                    <p class="very-small">Code example online: <a href="http://bit.ly/richquick3">http://bit.ly/richquick3</a></p>
-                </div>
-                <img class="plain column-one-third" data-src="media/code-tree-placement.png">
-            </div>
-            <aside class="notes">
-            </aside>
-        </section>
-        <section>
-            <div class="columns-container">
-                <div class="column-two-thirds">
                     <h4 class="nocaps">connectToAdServer.js</h4>
                     <pre class="small"><code data-trim class="jsx">
 import React from 'react';
@@ -242,17 +96,27 @@ export default Component => props => (
         <section>
             <div class="columns-container">
                 <div class="column-two-thirds">
-                    <h4 class="nocaps">ConnectedPlacement.js</h4>
+                    <h4 class="nocaps">AdvertisingSlot.js</h4>
                     <pre class="small"><code data-trim class="jsx">
+import React, { Component } from 'react';
 import connectToAdServer from './connectToAdServer';
-import Placement from './Placement';
 
-export default connectToAdServer(Placement);
+class AdvertisingSlot extends Component {
+  componentDidMount() {
+    const { activate, id } = this.props;
+    activate(id);
+  }
 
+  render() {
+    return &lt;div id={this.props.id} /&gt;
+  }
+}
+
+export default connectToAdServer(AdvertisingSlot);
                     </code></pre>
-                    <p class="very-small">Code example online: <a href="http://bit.ly/richquick5">http://bit.ly/richquick5</a></p>
+                    <p class="very-small">Code example online: <a href="http://bit.ly/richquick8">http://bit.ly/richquick8</a></p>
                 </div>
-                <img class="plain column-one-third" data-src="media/code-tree-connected-placement.png">
+                <img class="plain column-one-third" data-src="media/code-tree-advertising-slot.png">
             </div>
             <aside class="notes">
             </aside>
@@ -291,29 +155,6 @@ export default class extends Component {
                 <ul>
                     <li>image tag is just an example, in reality much more complicated</li>
                 </ul>
-            </aside>
-        </section>
-        <section>
-            <div class="columns-container">
-                <div class="column-two-thirds">
-                    <h4 class="nocaps">App.js</h4>
-                    <pre class="small"><code data-trim class="jsx">
-import React from 'react';
-import AdvertisingProvider from './AdvertisingProvider';
-import ConnectedPlacement from './ConnectedPlacement';
-
-export default () => (
-  &lt;AdvertisingProvider&gt;
-    &lt;ConnectedPlacement id="foo" /&gt;
-  &lt;/AdvertisingProvider&gt;
-);
-
-                    </code></pre>
-                    <p class="very-small">Code example online: <a href="http://bit.ly/richquick7">http://bit.ly/richquick7</a></p>
-                </div>
-                <img class="plain column-one-third" data-src="media/code-tree-app.png">
-            </div>
-            <aside class="notes">
             </aside>
         </section>
         <section>
