@@ -155,12 +155,41 @@
         </section>
         <section>
             <video controls class="stretch">
-                <source data-src="media/adding-provider-and-slots.mov" type="video/mp4"/>
+                <source data-src="media/adding-provider-and-slots.mov" type="video/mp4">
             </video>
             <p class="small">Code example online: <a href="http://bit.ly/richquick1">http://bit.ly/richquick1</a></p>
             <aside class="notes">
                 <ul>
                     <li>Ugly setup code nicely encapsulated</li>
+                </ul>
+            </aside>
+        </section>
+        <section>
+            <pre><code data-trim>
+
+const { Consumer, Provider } = React.createContext(defaultValue);
+
+            </code></pre>
+            <img alt="Tin Can Telephone" class="plain" data-src="media/tin-can-telephone.png">
+        </section>
+        <section>
+            <div class="columns-container">
+                <div class="column-two-thirds">
+                    <h4 class="nocaps">AdvertisingContext.js</h4>
+                    <pre><code data-trim>
+import { createContext } from 'react';
+
+export default createContext(() => {});
+            </code></pre>
+                    <p class="very-small">Code example online: <a href="http://bit.ly/richquick2">http://bit.ly/richquick2</a></p>
+                </div>
+                <img class="plain column-one-third" data-src="media/code-tree-advertising-context.png">
+            </div>
+            <aside class="notes">
+                <ul>
+                    <li>Singleton</li>
+                    <li>Default value</li>
+                    <li>Simple function is sufficient</li>
                 </ul>
             </aside>
         </section>

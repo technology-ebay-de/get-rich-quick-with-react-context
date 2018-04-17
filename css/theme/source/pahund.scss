@@ -67,6 +67,10 @@ $selectionBackgroundColor: $magenta;
 	font-size: 50%;
 }
 
+.reveal .very-small {
+	font-size: 30%;
+}
+
 .reveal pre.small {
 	font-size: 0.3em;
 }
@@ -75,3 +79,21 @@ $selectionBackgroundColor: $magenta;
 	border: none;
     box-shadow: none;
 }
+
+.reveal .nocaps {
+	text-transform: none;
+}
+
+.reveal .columns-container {
+	align-items: center;
+	display: flex;
+}
+
+.reveal .column-two-thirds {
+	flex: 1 1 66%;
+}
+
+.reveal .column-one-third {
+	flex: 1 1 33%;
+}
+
