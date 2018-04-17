@@ -34,7 +34,7 @@
         </section>
         <section>
             <h3>Google Publisher Tags + Prebid… Ugh!</h3>
-            <pre class="stretch small"><code data-trim style="height: 150vh">
+            <pre class="stretch small"><code data-trim style="height: 150vh" class="html">
 <script>
     var PREBID_TIMEOUT = 700;
 
@@ -176,7 +176,7 @@ const { Consumer, Provider } = React.createContext(defaultValue);
             <div class="columns-container">
                 <div class="column-two-thirds">
                     <h4 class="nocaps">AdvertisingContext.js</h4>
-                    <pre><code data-trim>
+                    <pre><code data-trim class="js">
 import { createContext } from 'react';
 
 export default createContext(() => {});
@@ -191,6 +191,131 @@ export default createContext(() => {});
                     <li>Default value</li>
                     <li>Simple function is sufficient</li>
                 </ul>
+            </aside>
+        </section>
+        <section>
+            <div class="columns-container">
+                <div class="column-two-thirds">
+                    <h4 class="nocaps">Placement.js</h4>
+                    <pre><code data-trim class="js">
+import React, { Component } from 'react';
+
+export default class extends Component {
+  componentDidMount() {
+    const { activate, id } = this.props;
+    activate(id);
+  }
+
+  render() {
+    return &lt;div id={this.props.id} /&gt;
+  }
+}
+            </code></pre>
+                    <p class="very-small">Code example online: <a href="http://bit.ly/richquick3">http://bit.ly/richquick3</a></p>
+                </div>
+                <img class="plain column-one-third" data-src="media/code-tree-placement.png">
+            </div>
+            <aside class="notes">
+            </aside>
+        </section>
+        <section>
+            <div class="columns-container">
+                <div class="column-two-thirds">
+                    <h4 class="nocaps">connectToAdServer.js</h4>
+                    <pre class="small"><code data-trim class="jsx">
+import React from 'react';
+import AdvertisingContext from './AdvertisingContext';
+
+export default Component => props => (
+  &lt;AdvertisingContext.Consumer&gt;
+    {activate =>
+        &lt;Component {...props} activate={activate} /&gt;}
+  &lt;/AdvertisingContext.Consumer&gt;
+);
+
+                    </code></pre>
+                    <p class="very-small">Code example online: <a href="http://bit.ly/richquick4">http://bit.ly/richquick4</a></p>
+                </div>
+                <img class="plain column-one-third" data-src="media/code-tree-connect-to-ad-server.png">
+            </div>
+            <aside class="notes">
+            </aside>
+        </section>
+        <section>
+            <div class="columns-container">
+                <div class="column-two-thirds">
+                    <h4 class="nocaps">ConnectedPlacement.js</h4>
+                    <pre class="small"><code data-trim class="jsx">
+import connectToAdServer from './connectToAdServer';
+import Placement from './Placement';
+
+export default connectToAdServer(Placement);
+
+                    </code></pre>
+                    <p class="very-small">Code example online: <a href="http://bit.ly/richquick5">http://bit.ly/richquick5</a></p>
+                </div>
+                <img class="plain column-one-third" data-src="media/code-tree-connected-placement.png">
+            </div>
+            <aside class="notes">
+            </aside>
+        </section>
+        <section>
+            <div class="columns-container">
+                <div class="column-two-thirds">
+                    <h4 class="nocaps">AdvertisingProvider.js</h4>
+                    <pre class="small"><code data-trim class="jsx">
+import React, { Component } from 'react';
+import AdvertisingContext from './AdvertisingContext';
+
+export default class extends Component {
+  activate(id) {
+    document.getElementById(id).innerHTML =
+      '&lt;img src="https://tpc.googlesyndication.com/' +
+      'simgad/14142086296742558944" ' +
+      'alt="" class="img_ad" width="300" ' +
+      'height="250" border="0"&gt;';
+  }
+
+  render() {
+    return (
+      &lt;AdvertisingContext.Provider value={this.activate}&gt;
+        {this.props.children}
+      &lt;/AdvertisingContext.Provider&gt;
+    );
+  }
+}
+                    </code></pre>
+                    <p class="very-small">Code example online: <a href="http://bit.ly/richquick6">http://bit.ly/richquick6</a></p>
+                </div>
+                <img class="plain column-one-third" data-src="media/code-tree-advertising-provider.png">
+            </div>
+            <aside class="notes">
+                <ul>
+                    <li>image tag is just an example, in reality much more complicated</li>
+                </ul>
+            </aside>
+        </section>
+        <section>
+            <div class="columns-container">
+                <div class="column-two-thirds">
+                    <h4 class="nocaps">App.js</h4>
+                    <pre class="small"><code data-trim class="jsx">
+import React from 'react';
+import AdvertisingProvider from './AdvertisingProvider';
+import ConnectedPlacement from './ConnectedPlacement';
+
+export default () => (
+  &lt;AdvertisingProvider&gt;
+    &lt;ConnectedPlacement id="foo" /&gt;
+  &lt;/AdvertisingProvider&gt;
+);
+
+                    </code></pre>
+                    <p class="very-small">Code example online: <a href="http://bit.ly/richquick7">http://bit.ly/richquick7</a></p>
+                </div>
+                <img class="plain column-one-third" data-src="media/code-tree-app.png">
+            </div>
+            <aside class="notes">
             </aside>
         </section>
     </div>
