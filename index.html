@@ -32,17 +32,10 @@
                 | <a target="_blank" href="https://twitter.com/wiekatz">@wiekatz</a>
             </small>
         </section>
-        <section>
-            <video controls class="stretch">
-                <source data-src="media/adding-provider-and-slots.mov" type="video/mp4">
-            </video>
-            <p class="small">Code example online: <a href="http://bit.ly/richquick1">http://bit.ly/richquick1</a></p>
-            <aside class="notes">
-                <ul>
-                    <li>Ugly setup code nicely encapsulated</li>
-                </ul>
-            </aside>
-        </section>
+        <section data-background-image="media/adding-provider-and-slots-still.png" data-background-size="contain"></section>
+        <section data-background-video="media/adding-provider-and-slots.mov" data-background-size="contain" data-background-transition="none"></section>
+        <section data-background-image="media/prebid-movie-still.jpg" data-background-size="contain"></section>
+        <section data-background-video="media/prebid-movie.mp4" data-background-size="contain" data-background-transition="none"></section>
         <section>
             <pre><code data-trim>
 const { Provider, Consumer } = React.createContext(defaultValue);
@@ -58,7 +51,6 @@ import { createContext } from 'react';
 
 export default createContext(() => {});
             </code></pre>
-                    <p class="very-small">Code example online: <a href="http://bit.ly/richquick2">http://bit.ly/richquick2</a></p>
                 </div>
                 <img class="plain column-one-third" data-src="media/code-tree-advertising-context.png">
             </div>
@@ -86,7 +78,6 @@ export default Component => props => (
 );
 
                     </code></pre>
-                    <p class="very-small">Code example online: <a href="http://bit.ly/richquick4">http://bit.ly/richquick4</a></p>
                 </div>
                 <img class="plain column-one-third" data-src="media/code-tree-connect-to-ad-server.png">
             </div>
@@ -114,7 +105,6 @@ class AdvertisingSlot extends Component {
 
 export default connectToAdServer(AdvertisingSlot);
                     </code></pre>
-                    <p class="very-small">Code example online: <a href="http://bit.ly/richquick8">http://bit.ly/richquick8</a></p>
                 </div>
                 <img class="plain column-one-third" data-src="media/code-tree-advertising-slot.png">
             </div>
@@ -147,7 +137,6 @@ export default class extends Component {
   }
 }
                     </code></pre>
-                    <p class="very-small">Code example online: <a href="http://bit.ly/richquick6">http://bit.ly/richquick6</a></p>
                 </div>
                 <img class="plain column-one-third" data-src="media/code-tree-advertising-provider.png">
             </div>
@@ -155,13 +144,6 @@ export default class extends Component {
                 <ul>
                     <li>image tag is just an example, in reality much more complicated</li>
                 </ul>
-            </aside>
-        </section>
-        <section>
-            <video controls class="stretch">
-                <source data-src="media/prebid-movie.mp4" type="video/mp4">
-            </video>
-            <aside class="notes">
             </aside>
         </section>
         <section>
