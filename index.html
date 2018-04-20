@@ -134,11 +134,97 @@ export default props => (
         <section>
             <div class="columns-container">
                 <div class="column-one-half">
+                    <pre class="stretch big"><code data-trim class="jsx">
+// Old context API
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
+class MyProvider extends Component {
+  getChildContext() {
+    return { message: 'hello world' };
+  }
+  render() {
+    return this.props.children;
+  }
+}
+
+MyProvider.childContextTypes = {
+  message: PropTypes.string
+};
+
+class MyConsumer extends Component {
+  render() {
+    return &lt;h1&gt;{this.context.message}&lt;/h1&gt;
+  }
+}
+
+MyConsumer.contextTypes = {
+  message: PropTypes.string
+};
+
+export default () => (
+  &lt;MyProvider&gt;
+    &lt;MyConsumer /&gt;
+  &lt;/MyProvider&gt;
+);
+                    </code></pre>
+                </div>
+                <div class="column-one-half">
+                    <pre class="stretch big"><code data-trim class="jsx">
+// New context API
+import React, {
+  Component,
+  createContext
+} from 'react';
+
+const { Provider, Consumer } = createContext();
+
+
+function MyProvider({ children }) {
+  return (
+    &lt;Provider value={'hello world'}&gt;
+      {children}
+    &lt;/Provider&gt;
+  );
+}
+
+
+function MyConsumer(props) {
+  return (
+    &lt;Consumer&gt;
+      {message => &lt;h1&gt;{message}&lt;/h1&gt;}
+    &lt;/Consumer&gt;
+  );
+}
+
+
+export default () => (
+  &lt;MyProvider&gt;
+    &lt;MyConsumer /&gt;
+  &lt;/MyProvider&gt;
+);
+
+
+                    </code></pre>
+                </div>
+            </div>
+            <aside class="notes">
+                <p>advantages new API:</p>
+                <ul>
+                    <li>allows functional components</li>
+                    <li>works without prop types</li>
+                    <li>no bugs from identical context types</li>
+                </ul>
+            </aside>
+        </section>
+        <section>
+            <div class="columns-container">
+                <div class="column-one-half">
                     <img src="media/toothpaste.png" class="plain" style="width: 100%">
                 </div>
                 <div class="column-one-half">
                     <h2>Don't use it for everything!</h2>
-                    <p class="big">Other use case example<br>besides <em>getting rich quick:</em></p>
+                    <p class="big">Other usecase examples<br>besides <em>getting rich quick:</em></p>
                     <ul class="big">
                         <li>Internationalization</li>
                         <li>Layout themes</li>
@@ -168,7 +254,8 @@ export default props => (
             </p>
             <p>
                 View the code examples:<br>
-                <a href="https://codesandbox.io/s/488y5n5kw">codesandbox.io/s/488y5n5kw</a>
+                <a href="https://codesandbox.io/s/488y5n5kw">codesandbox.io/s/488y5n5kw</a><br>
+                <a href="https://codesandbox.io/s/3rz877y8jm">codesandbox.io/s/3rz877y8jm</a>
             </p>
             <aside class="notes">
             </aside>
