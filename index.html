@@ -26,20 +26,18 @@
     <div class="slides">
         <section>
             <h2>Get rich quick with…</h2>
-            <img alt="React Context – New! 16.3" class="stretch plain" src="media/title.png">
-            <small>
-                <strong>Patrick Hund</strong> | frontend developer at <a href="https://ebaytech.berlin">eBay Tech Berlin</a>
-                | <a target="_blank" href="https://twitter.com/wiekatz">@wiekatz</a>
-            </small>
+            <img alt="React Context – New! 16.3" class="stretch plain" src="media/title.png"><br>
+            <strong>Patrick Hund</strong> | frontend developer at <a href="https://ebaytech.berlin">eBay Tech Berlin</a>
+            | <a target="_blank" href="https://twitter.com/wiekatz">@wiekatz</a>
         </section>
         <section data-background-image="media/adding-provider-and-slots-still.png" data-background-size="contain"></section>
         <section data-background-video="media/adding-provider-and-slots.mov" data-background-size="contain" data-background-transition="none"></section>
         <section data-background-image="media/prebid-movie-still.jpg" data-background-size="contain"></section>
         <section data-background-video="media/prebid-movie.mp4" data-background-size="contain" data-background-transition="none"></section>
         <section>
-            <h2>
+            <h3>
                 <code>const { Provider, Consumer } = React.createContext(defaultValue);</code>
-            </h2>
+            </h3>
             <img alt="Tin Can Telephone" class="plain" data-src="media/tin-can-telephone.png">
         </section>
         <section>
@@ -135,31 +133,43 @@ export default props => (
         </section>
         <section>
             <div class="columns-container">
-                <div class="column-one-third stretch">
-                    <img alt="Screenshot README.md react-prebid on GitHub" data-src="media/react-prebid-readme.png" style="width: 100%">
+                <div class="column-one-half">
+                    <img src="media/toothpaste.png" class="plain" style="width: 100%">
                 </div>
-                <div class="column-two-thirds">
-                    <p>
-                        <em>react-prebid</em> library on GitHub:<br>
-                        <a href="https://github.com/technology-ebay-de/react-prebid">github.com/technology-ebay-de/react-prebid</a>
-                    </p>
-                    <p>
-                        Slides of this talk online:<br>
-                        <a href="https://technology-ebay-de.github.io/get-rich-quick-with-react-context/">technology-ebay-de.github.io/get-rich-quick-with-react-context/</a>
-                    </p>
-                    <p>
-                        Code examples:<br>
-                        <a href="https://codesandbox.io/s/488y5n5kw">codesandbox.io/s/488y5n5kw</a>
-                    </p>
-                    <p class="big">
-                        Follow me on Twitter:<br>
-                        <a href="https://twitter.com/wiekatz" class="pink">@wiekatz</a>
-                    </p>
-                    <p>
-                        <strong>Patrick Hund</strong> | frontend developer at <a href="https://ebaytech.berlin">eBay Tech Berlin</a>
-                    </p>
+                <div class="column-one-half">
+                    <h2>Don't use it for everything!</h2>
+                    <p class="big">Other use case example<br>besides <em>getting rich quick:</em></p>
+                    <ul class="big">
+                        <li>Internationalization</li>
+                        <li>Layout themes</li>
+                        <li>Tracking</li>
+                    </ul>
                 </div>
             </div>
+            <aside class="notes">
+                cross-cutting concerns
+            </aside>
+        </section>
+        <section>
+            <img class="stretch" data-src="media/react-prebid-readme.png">
+            <a href="https://github.com/technology-ebay-de/react-prebid">github.com/technology-ebay-de/react-prebid</a>
+        </section>
+        <section data-background-image="media/bubble-background.png">
+            <p class="big">
+                Follow me on Twitter:<br>
+                <a href="https://twitter.com/wiekatz" class="pink">@wiekatz</a>
+            </p>
+            <p>
+                <strong>Patrick Hund</strong>, frontend developer at <a href="https://ebaytech.berlin">eBay Tech Berlin</a>
+            </p>
+            <p>
+                View the slides:<br>
+                <a href="https://technology-ebay-de.github.io/get-rich-quick-with-react-context/">technology-ebay-de.github.io/get-rich-quick-with-react-context/</a>
+            </p>
+            <p>
+                View the code examples:<br>
+                <a href="https://codesandbox.io/s/488y5n5kw">codesandbox.io/s/488y5n5kw</a>
+            </p>
             <aside class="notes">
             </aside>
         </section>
