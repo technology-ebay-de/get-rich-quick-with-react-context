@@ -270,6 +270,9 @@ body {
 .reveal .pink {
   color: #d33682; }
 
+.reveal .big {
+  font-size: 150%; }
+
 .reveal .small {
   font-size: 50%; }
 
@@ -278,6 +281,9 @@ body {
 
 .reveal pre.small {
   font-size: 0.4em; }
+
+.reveal pre.big {
+  font-size: 0.7em; }
 
 .reveal section img {
   border: none; }

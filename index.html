@@ -37,16 +37,16 @@
         <section data-background-image="media/prebid-movie-still.jpg" data-background-size="contain"></section>
         <section data-background-video="media/prebid-movie.mp4" data-background-size="contain" data-background-transition="none"></section>
         <section>
-            <pre><code data-trim>
-const { Provider, Consumer } = React.createContext(defaultValue);
-            </code></pre>
+            <h2>
+                <code>const { Provider, Consumer } = React.createContext(defaultValue);</code>
+            </h2>
             <img alt="Tin Can Telephone" class="plain" data-src="media/tin-can-telephone.png">
         </section>
         <section>
             <div class="columns-container">
                 <div class="column-two-thirds">
-                    <h4 class="nocaps">AdvertisingContext.js</h4>
-                    <pre><code data-trim class="js">
+                    <h2 class="nocaps">AdvertisingContext.js</h2>
+                    <pre class="big"><code data-trim class="js">
 import { createContext } from 'react';
 
 export default createContext(() => {});
@@ -65,72 +65,22 @@ export default createContext(() => {});
         <section>
             <div class="columns-container">
                 <div class="column-two-thirds">
-                    <h4 class="nocaps">connectToAdServer.js</h4>
-                    <pre class="small"><code data-trim class="jsx">
-import React from 'react';
-import AdvertisingContext from './AdvertisingContext';
-
-export default Component => props => (
-  &lt;AdvertisingContext.Consumer&gt;
-    {activate =>
-        &lt;Component {...props} activate={activate} /&gt;}
-  &lt;/AdvertisingContext.Consumer&gt;
-);
-
-                    </code></pre>
-                </div>
-                <img class="plain column-one-third" data-src="media/code-tree-connect-to-ad-server.png">
-            </div>
-            <aside class="notes">
-            </aside>
-        </section>
-        <section>
-            <div class="columns-container">
-                <div class="column-two-thirds">
-                    <h4 class="nocaps">AdvertisingSlot.js</h4>
-                    <pre class="small"><code data-trim class="jsx">
-import React, { Component } from 'react';
-import connectToAdServer from './connectToAdServer';
-
-class AdvertisingSlot extends Component {
-  componentDidMount() {
-    const { activate, id } = this.props;
-    activate(id);
-  }
-
-  render() {
-    return &lt;div id={this.props.id} /&gt;
-  }
-}
-
-export default connectToAdServer(AdvertisingSlot);
-                    </code></pre>
-                </div>
-                <img class="plain column-one-third" data-src="media/code-tree-advertising-slot.png">
-            </div>
-            <aside class="notes">
-            </aside>
-        </section>
-        <section>
-            <div class="columns-container">
-                <div class="column-two-thirds">
-                    <h4 class="nocaps">AdvertisingProvider.js</h4>
-                    <pre class="small"><code data-trim class="jsx">
+                    <h2 class="nocaps">AdvertisingProvider.js</h2>
+                    <pre class="stretch big"><code data-trim class="jsx">
 import React, { Component } from 'react';
 import AdvertisingContext from './AdvertisingContext';
+import config from './config';
+import Advertising from './Advertising';
 
 export default class extends Component {
-  activate(id) {
-    document.getElementById(id).innerHTML =
-      '&lt;img src="https://tpc.googlesyndication.com/' +
-      'simgad/14142086296742558944" ' +
-      'alt="" class="img_ad" width="300" ' +
-      'height="250" border="0"&gt;';
+  constructor(props) {
+    super(props);
+    this.advertising = new Advertising(config);
   }
 
   render() {
     return (
-      &lt;AdvertisingContext.Provider value={this.activate}&gt;
+      &lt;AdvertisingContext.Provider value={this.advertising.activate}&gt;
         {this.props.children}
       &lt;/AdvertisingContext.Provider&gt;
     );
@@ -149,19 +99,55 @@ export default class extends Component {
         <section>
             <div class="columns-container">
                 <div class="column-two-thirds">
-                    <p class="small">
+                    <h2 class="nocaps">AdvertisingSlot.js</h2>
+                    <pre class="stretch big"><code data-trim class="jsx">
+import React, { Component } from 'react';
+import AdvertisingContext from './AdvertisingContext';
+
+class AdvertisingSlot extends Component {
+  componentDidMount() {
+    const { activate, id } = this.props;
+    activate(id);
+  }
+
+  render() {
+    return &lt;div id={this.props.id} /&gt;
+  }
+}
+
+export default props => (
+  &lt;AdvertisingContext.Consumer&gt;
+    {activate => &lt;AdvertisingSlot {...props} activate={activate} /&gt;}
+  &lt;/AdvertisingContext.Consumer&gt;
+);
+
+                    </code></pre>
+                </div>
+                <img class="plain column-one-third" data-src="media/code-tree-advertising-slot.png">
+            </div>
+            <aside class="notes">
+            </aside>
+        </section>
+        <section>
+            <div class="columns-container">
+                <div class="column-two-thirds">
+                    <p>
                         <em>react-prebid</em> library on GitHub:<br>
                         <a href="https://github.com/technology-ebay-de/react-prebid">github.com/technology-ebay-de/react-prebid</a>
                     </p>
-                    <p class="small">
+                    <p>
                         Slides of this talk online:<br>
                         <a href="https://technology-ebay-de.github.io/get-rich-quick-with-react-context/">technology-ebay-de.github.io/get-rich-quick-with-react-context/</a>
                     </p>
                     <p>
+                        Code examples:<br>
+                        <a href="https://codesandbox.io/s/488y5n5kw">codesandbox.io/s/488y5n5kw</a>
+                    </p>
+                    <p class="big">
                         Follow me on Twitter:<br>
                         <a href="https://twitter.com/wiekatz" class="pink">@wiekatz</a>
                     </p>
-                    <p class="small">
+                    <p>
                         <strong>Patrick Hund</strong> | frontend developer at <a href="https://ebaytech.berlin">eBay Tech Berlin</a>
                     </p>
                 </div>
@@ -182,6 +168,10 @@ export default class extends Component {
     // - https://github.com/hakimel/reveal.js#dependencies
     /* global hljs */
     Reveal.initialize({
+        width: 1980,
+        height: 1200,
+        margin: 0.01,
+
         history: true,
         dependencies: [
             { src: 'plugin/markdown/marked.js' },

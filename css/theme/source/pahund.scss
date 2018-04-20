@@ -67,6 +67,10 @@ $selectionBackgroundColor: $magenta;
 	color: $magenta;
 }
 
+.reveal .big {
+	font-size: 150%;
+}
+
 .reveal .small {
 	font-size: 50%;
 }
@@ -77,6 +81,10 @@ $selectionBackgroundColor: $magenta;
 
 .reveal pre.small {
 	font-size: 0.4em;
+}
+
+.reveal pre.big {
+	font-size: 0.7em;
 }
 
 .reveal section img {
