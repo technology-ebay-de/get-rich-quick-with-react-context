@@ -25,7 +25,7 @@
 <div class="reveal">
     <div class="slides">
         <section>
-            <h3>Get rich quick with…</h3>
+            <h2>Get rich quick with…</h2>
             <img alt="React Context – New! 16.3" class="stretch plain" src="media/title.png">
             <small>
                 <strong>Patrick Hund</strong> | frontend developer at <a href="https://ebaytech.berlin">eBay Tech Berlin</a>
@@ -52,7 +52,9 @@ import { createContext } from 'react';
 export default createContext(() => {});
             </code></pre>
                 </div>
-                <img class="plain column-one-third" data-src="media/code-tree-advertising-context.png">
+                <div class="column-one-third">
+                    <img class="plain" data-src="media/code-tree-advertising-context.png">
+                </div>
             </div>
             <aside class="notes">
                 <ul>
@@ -69,13 +71,12 @@ export default createContext(() => {});
                     <pre class="stretch big"><code data-trim class="jsx">
 import React, { Component } from 'react';
 import AdvertisingContext from './AdvertisingContext';
-import config from './config';
 import Advertising from './Advertising';
 
 export default class extends Component {
   constructor(props) {
     super(props);
-    this.advertising = new Advertising(config);
+    this.advertising = new Advertising(props.config);
   }
 
   render() {
@@ -88,7 +89,9 @@ export default class extends Component {
 }
                     </code></pre>
                 </div>
-                <img class="plain column-one-third" data-src="media/code-tree-advertising-provider.png">
+                <div class="column-one-third">
+                    <img class="plain" data-src="media/code-tree-advertising-provider.png">
+                </div>
             </div>
             <aside class="notes">
                 <ul>
@@ -123,13 +126,18 @@ export default props => (
 
                     </code></pre>
                 </div>
-                <img class="plain column-one-third" data-src="media/code-tree-advertising-slot.png">
+                <div class="column-one-third">
+                    <img class="plain" data-src="media/code-tree-advertising-slot.png">
+                </div>
             </div>
             <aside class="notes">
             </aside>
         </section>
         <section>
             <div class="columns-container">
+                <div class="column-one-third stretch">
+                    <img alt="Screenshot README.md react-prebid on GitHub" data-src="media/react-prebid-readme.png" style="width: 100%">
+                </div>
                 <div class="column-two-thirds">
                     <p>
                         <em>react-prebid</em> library on GitHub:<br>
@@ -151,7 +159,6 @@ export default props => (
                         <strong>Patrick Hund</strong> | frontend developer at <a href="https://ebaytech.berlin">eBay Tech Berlin</a>
                     </p>
                 </div>
-                <img alt="Screenshot README.md react-prebid on GitHub" class="column-one-third" data-src="media/react-prebid-readme.png">
             </div>
             <aside class="notes">
             </aside>
