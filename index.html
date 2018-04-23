@@ -31,16 +31,16 @@
             | <a target="_blank" href="https://twitter.com/wiekatz">@wiekatz</a>
             <aside class="notes">
                 <p>Hi there, I’m Patrick. I work for eBay in Berlin.</p>
-                <p>I’m going to talk to you about the new context API, which has been completely revamped with the latest version of React.</p>
-                <p>You’ll learn how it works, how to use it for your own work and how to migrate from the old context API.</p>
+                <p>I’m here to talk to you about the new context API, which has been completely revamped with the latest version of React.</p>
+                <p>I'll show you how it works, how to use it for your own work and discuss the differences to the old context API.</p>
             </aside>
         </section>
         <section data-background-image="media/adding-provider-and-slots-still.png" data-background-size="contain">
             <aside class="notes">
                 <p>So I want to get rich quick, how do I do that?</p>
                 <p>I put some ads on my website!</p>
-                <p>Integrating ads from an ad server integration into a website is a messy business, with complicated initialization logic and lots of global variables and functions.</p>
-                <p>I’ve found a good tool to encapsulate all this messiness in my React application: the context API. It’s a great use case for this kind of thing.</p>
+                <p>Integrating ads from an ad server into a website is a <strong>messy</strong> business, with complicated initialization logic and lots of global variables and functions.</p>
+                <p>I’ve found a good tool to <strong>encapsulate</strong> all this messiness in my React application: the <strong>context API</strong>. It’s a great use case for this kind of thing.</p>
             </aside>
         </section>
         <section data-background-video="media/adding-provider-and-slots.mov" data-background-size="contain" data-background-transition="none">
@@ -67,8 +67,8 @@
             <img alt="Tin Can Telephone" class="plain" data-src="media/tin-can-telephone.png">
             <aside class="notes">
                 <p>So how does the new context API work?</p>
-                <p>It’s very simple. At it’s heart, it is just a call to the function createContext.</p>
-                <p>The function returns two React components, the Provider and the Consumer.</p>
+                <p>It’s very simple. At it’s heart, it is just a call to the function <em>createContext</em>.</p>
+                <p>The function returns two React components, the <strong>Provider</strong> and the <strong>Consumer</strong>.</p>
                 <p>You can pass any data from the provider to the consumers – object, string, function, whatever.</p>
                 <p>The default value is optional, it is used only if there is a consumer that is not wrapped by a provider. You can use it for testing.</p>
             </aside>
@@ -90,7 +90,7 @@ export default createContext(() => {});
             <aside class="notes">
                 <p>This is what this would look like for my advertising example.</p>
                 <p>I have a module that exports the Provider and Consumer components created by createContext.</p>
-                <p>Note that the created context is a singleton, since the function is called when my module is loaded.</p>
+                <p>Note that the created context is a <strong>singleton</strong>, since the function is called when my module is loaded.</p>
                 <p>I want to provide only one function to the consumers, which is used for activating an ad slot, so as a default value, I use a function that does nothing.</p>
             </aside>
         </section>
@@ -125,9 +125,9 @@ export default class extends Component {
             </div>
             <aside class="notes">
                 <p>So here’s my advertising provider component.</p>
-                <p>It wraps its children in the provider imported from my context module and has a single prop named value.</p>
+                <p>It wraps its children in the provider imported from my context module and has a single prop named <em>value</em>.</p>
                 <p>Whatever I assign to this value prop is accessible to the consumer components.</p>
-                <p>In my case, I pass in a method named „activate“ of my advertising module.</p>
+                <p>In my case, I pass in a method named <em>activate</em> of my advertising module.</p>
             </aside>
         </section>
         <section>
@@ -164,7 +164,7 @@ export default props => (
             <aside class="notes">
                 <p>Then there’s the advertising slot component.</p>
                 <p>It uses the consumer component from the context to get access to the activate method.</p>
-                <p>The consumer component passes the value from the provider using the render props pattern.</p>
+                <p>The consumer component passes the value from the provider using the <strong>render props</strong> pattern.</p>
                 <p>It expects a function as children prop. The function gets the value from the provider as argument and passes this on to my advertising slot as a regular prop, along with an ID prop.</p>
                 <p>So the beauty of it is that my advertising slot component is just a plain old component, no magic involved here.</p>
                 <p>When the slot component is mounted, it calls the activate function, passing the ID, and that’s all the advertising module needs to work its black magic and put a banner in the did rendered by the slot component.</p>
@@ -248,10 +248,9 @@ export default () => (
                 </div>
             </div>
             <aside class="notes">
-                <p>Let’s take a look at the differences between the old, deprecated context API and the new one.</p>
-                <p>On this slide, you can see minimal code examples to send a text string message from a provider to a consumer, on the left with the old context API, on the right, the new one.</p>
+                <p>Let’s take a look at the differences between the old, deprecated context API on the left and the new one on the right.</p>
                 <p>With the old context API, you would use prop types to define a child context type for the data you want to provide to consumers. So that means you need to have a dependency to the prop-types package.</p>
-                <p>You had to make sure the context type wasn’t ambiguous with that of other providers, which could cause hard to track down bugs.</p>
+                <p>You had to make sure the context type wasn't ambiguous with that of other providers, which could cause hard to track down bugs.</p>
                 <p>Another problem is that you cannot use pure components for consumer and provider, they need to be class components, which may have a negative impact on rendering performance.</p>
             </aside>
         </section>
@@ -284,7 +283,7 @@ export default () => (
             <aside class="notes">
                 <p>That’s just about it, just one more thing:</p>
                 <p>If you do actually face the requirement of integrating advertising in your React app using Google Doubleclick for Publishers and Prebid, you need not reinvent the wheel.</p>
-                <p>You can just use the library we developed at eBay. We’ve published it with MIT license on npm, so you, too, can get rich quick!</p>
+                <p>You can just use the library we developed at eBay. We’ve published it with an MIT license on npm, so you, too, can get rich quick!</p>
             </aside>
         </section>
         <section data-background-image="media/bubble-background.png">
