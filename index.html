@@ -29,16 +29,49 @@
             <img alt="React Context – New! 16.3" class="stretch plain" src="media/title.png"><br>
             <strong>Patrick Hund</strong> | frontend developer at <a href="https://ebaytech.berlin">eBay Tech Berlin</a>
             | <a target="_blank" href="https://twitter.com/wiekatz">@wiekatz</a>
+            <aside class="notes">
+                <p>Hi there, I’m Patrick. I work for eBay in Berlin.</p>
+                <p>I’m going to talk to you about the new context API, which has been completely revamped with the latest version of React.</p>
+                <p>You’ll learn how it works, how to use it for your own work and how to migrate from the old context API.</p>
+            </aside>
         </section>
-        <section data-background-image="media/adding-provider-and-slots-still.png" data-background-size="contain"></section>
-        <section data-background-video="media/adding-provider-and-slots.mov" data-background-size="contain" data-background-transition="none"></section>
+        <section data-background-image="media/adding-provider-and-slots-still.png" data-background-size="contain">
+            <aside class="notes">
+                <p>So I want to get rich quick, how do I do that?</p>
+                <p>I put some ads on my website!</p>
+                <p>Integrating ads from an ad server integration into a website is a messy business, with complicated initialization logic and lots of global variables and functions.</p>
+                <p>I’ve found a good tool to encapsulate all this messiness in my React application: the context API. It’s a great use case for this kind of thing.</p>
+            </aside>
+        </section>
+        <section data-background-video="media/adding-provider-and-slots.mov" data-background-size="contain" data-background-transition="none">
+            <aside class="notes">
+                <p>With the context API, I can just wrap my page in a provider component, like this…</p>
+                <p>And then add my ad slot components to make my ad server put some ads on the page.</p>
+            </aside>
+        </section>
         <section data-background-image="media/prebid-movie-still.jpg" data-background-size="contain"></section>
-        <section data-background-video="media/prebid-movie.mp4" data-background-size="contain" data-background-transition="none"></section>
+        <section data-background-video="media/prebid-movie.mp4" data-background-size="contain" data-background-transition="none">
+            <aside class="notes">
+                <p>So when my advertising provider component is initialized, it constructs an internal advertising module with my configuration.</p>
+                <p>The advertising module does all the dirty work. It configures my ad slots with my ad server.</p>
+                <p>When one of my advertising slot components mount, they call an activate function that is passed to them by the provider.</p>
+                <p>This causes my advertising module to tell the ad server: OK, go ahead and fill that slot with some advertising creative.</p>
+                <p>The ad server then uses a system called Prebid to make an online auction to sell the advertising space to the highest bidder.</p>
+                <p>Finally, it fills up my ad slot with the creative.</p>
+            </aside>
+        </section>
         <section>
             <h3>
                 <code>const { Provider, Consumer } = React.createContext(defaultValue);</code>
             </h3>
             <img alt="Tin Can Telephone" class="plain" data-src="media/tin-can-telephone.png">
+            <aside class="notes">
+                <p>So how does the new context API work?</p>
+                <p>It’s very simple. At it’s heart, it is just a call to the function createContext.</p>
+                <p>The function returns two React components, the Provider and the Consumer.</p>
+                <p>You can pass any data from the provider to the consumers – object, string, function, whatever.</p>
+                <p>The default value is optional, it is used only if there is a consumer that is not wrapped by a provider. You can use it for testing.</p>
+            </aside>
         </section>
         <section>
             <div class="columns-container">
@@ -55,11 +88,10 @@ export default createContext(() => {});
                 </div>
             </div>
             <aside class="notes">
-                <ul>
-                    <li>Singleton</li>
-                    <li>Default value</li>
-                    <li>Simple function is sufficient</li>
-                </ul>
+                <p>This is what this would look like for my advertising example.</p>
+                <p>I have a module that exports the Provider and Consumer components created by createContext.</p>
+                <p>Note that the created context is a singleton, since the function is called when my module is loaded.</p>
+                <p>I want to provide only one function to the consumers, which is used for activating an ad slot, so as a default value, I use a function that does nothing.</p>
             </aside>
         </section>
         <section>
@@ -92,9 +124,10 @@ export default class extends Component {
                 </div>
             </div>
             <aside class="notes">
-                <ul>
-                    <li>image tag is just an example, in reality much more complicated</li>
-                </ul>
+                <p>So here’s my advertising provider component.</p>
+                <p>It wraps its children in the provider imported from my context module and has a single prop named value.</p>
+                <p>Whatever I assign to this value prop is accessible to the consumer components.</p>
+                <p>In my case, I pass in a method named „activate“ of my advertising module.</p>
             </aside>
         </section>
         <section>
@@ -129,6 +162,12 @@ export default props => (
                 </div>
             </div>
             <aside class="notes">
+                <p>Then there’s the advertising slot component.</p>
+                <p>It uses the consumer component from the context to get access to the activate method.</p>
+                <p>The consumer component passes the value from the provider using the render props pattern.</p>
+                <p>It expects a function as children prop. The function gets the value from the provider as argument and passes this on to my advertising slot as a regular prop, along with an ID prop.</p>
+                <p>So the beauty of it is that my advertising slot component is just a plain old component, no magic involved here.</p>
+                <p>When the slot component is mounted, it calls the activate function, passing the ID, and that’s all the advertising module needs to work its black magic and put a banner in the did rendered by the slot component.</p>
             </aside>
         </section>
         <section>
@@ -209,12 +248,11 @@ export default () => (
                 </div>
             </div>
             <aside class="notes">
-                <p>advantages new API:</p>
-                <ul>
-                    <li>allows functional components</li>
-                    <li>works without prop types</li>
-                    <li>no bugs from identical context types</li>
-                </ul>
+                <p>Let’s take a look at the differences between the old, deprecated context API and the new one.</p>
+                <p>On this slide, you can see minimal code examples to send a text string message from a provider to a consumer, on the left with the old context API, on the right, the new one.</p>
+                <p>With the old context API, you would use prop types to define a child context type for the data you want to provide to consumers. So that means you need to have a dependency to the prop-types package.</p>
+                <p>You had to make sure the context type wasn’t ambiguous with that of other providers, which could cause hard to track down bugs.</p>
+                <p>Another problem is that you cannot use pure components for consumer and provider, they need to be class components, which may have a negative impact on rendering performance.</p>
             </aside>
         </section>
         <section>
@@ -233,12 +271,21 @@ export default () => (
                 </div>
             </div>
             <aside class="notes">
-                cross-cutting concerns
+                <p>So when should you use context?</p>
+                <p>Consider it one of many tools in your tool box, don’t use it for everything.</p>
+                <p>It’s good for cross-cutting concerns like internationalization, theming, or tracking.</p>
+                <p>Whenever you find yourself passing props down multiple levels of nested components, consider using context.</p>
+                <p>But be aware that for complex scenarios, you will probably be better off using something like Redux or MobX for state management.</p>
             </aside>
         </section>
         <section>
             <img class="stretch" data-src="media/react-prebid-readme.png">
             <a href="https://github.com/technology-ebay-de/react-prebid">github.com/technology-ebay-de/react-prebid</a>
+            <aside class="notes">
+                <p>That’s just about it, just one more thing:</p>
+                <p>If you do actually face the requirement of integrating advertising in your React app using Google Doubleclick for Publishers and Prebid, you need not reinvent the wheel.</p>
+                <p>You can just use the library we developed at eBay. We’ve published it with MIT license on npm, so you, too, can get rich quick!</p>
+            </aside>
         </section>
         <section data-background-image="media/bubble-background.png">
             <h1>Thank you!</h1>
@@ -259,6 +306,8 @@ export default () => (
                 <a href="https://codesandbox.io/s/3rz877y8jm">codesandbox.io/s/3rz877y8jm</a>
             </p>
             <aside class="notes">
+                <p>Thank you very much for listening!</p>
+                <p>Don’t forget to follow me on Twitter, and have fun at the conference!</p>
             </aside>
         </section>
     </div>
